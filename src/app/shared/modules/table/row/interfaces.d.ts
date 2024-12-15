@@ -1,1 +1,0 @@
-export type IRowData = (string | number)[];
