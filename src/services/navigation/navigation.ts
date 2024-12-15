@@ -1,5 +1,4 @@
 import { Loader } from "@shared";
-import { Device } from "@services/device/device";
 import type { Page } from "@decorators";
 import type { State } from "@services/state/state";
 import { StateKeys } from "@constants/stateKeys.constant";
