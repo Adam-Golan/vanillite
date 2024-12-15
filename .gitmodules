@@ -1,0 +1,6 @@
+[submodule "src/utils"]
+	path = src/utils
+	url = https://github.com/Adam-Golan/AugmentJS.git
+[submodule "src/style"]
+	path = src/style
+	url = https://github.com/Adam-Golan/CSSer.git
