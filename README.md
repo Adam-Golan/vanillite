@@ -29,12 +29,12 @@ Initiate project
   npm run initiate
 ```
 
-Initiate git (optional)
-```bash
-  npm run git_init
-```
-
 Start developing
 ```bash
   npm run dev
+```
+
+Use [playground](./src/playground.ts) if you want to experiment
+```bash
+  npm run playground
 ```
