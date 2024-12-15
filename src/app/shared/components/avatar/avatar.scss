@@ -1,0 +1,9 @@
+avatar-component.avatar {
+    --fill: var(--color);
+    display: inline-block;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: var(--disabled);
+}
