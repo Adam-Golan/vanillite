@@ -24,7 +24,6 @@ export class Navigation {
                 : this.fisrtLoad();
         });
         window.addEventListener('hashchange', () => history.replaceState(null, '', window.location.pathname), { once: true });
-        // this.buildTreeMap();
         this.subscribes();
     }
 

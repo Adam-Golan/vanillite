@@ -3,7 +3,6 @@ import { Enlist, addMeta } from "@decorators/utils";
 import { type Navigation, State } from "@services";
 import { StateKeys } from "@constants/stateKeys.constant";
 import { LayoutType } from "@decorators/types";
-import { BasePageText } from "@i18n/interfaces";
 import { IFooterConfig } from "@shared/modules/footer/types";
 
 /**
@@ -15,7 +14,7 @@ export function PageDecorator(target: CustomElementConstructor) {
     Enlist('page', target);
 }
 
-export abstract class Page<IText extends BasePageText = any> extends Basis<IText> {
+export abstract class Page<IText = any> extends Basis<IText> {
     // Creating a page's state.
     state = new State();
     // Declaring layout type.
