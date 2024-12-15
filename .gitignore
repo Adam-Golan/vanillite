@@ -1,0 +1,34 @@
+# IDE environment folders
+.vscode/
+.idea/
+.netbeans/
+
+# Node.js and npm
+node_modules/
+npm-debug.log
+package-lock.json
+
+# Build and dist folders
+build/
+dist/
+
+# Temp files
+*.tmp
+*.log
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Editor files
+*.sublime-text
+*.atom
+*.brackets
+*.eslintrc
+*.jscsrc
+
+# Other
+*.env
+*.env.*
+*.lock
+coverage/

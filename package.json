@@ -1,0 +1,34 @@
+{
+  "name": "vanilla-site",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "workspaces": [
+    "/src/style"
+  ],
+  "scripts": {
+    "update-project": "git submodule update --recursive --remote",
+    "initiate": "git submodule update --init --recursive && npm install --recursive",
+    "git_init": "git init && git add -A && git commit -m \"Initiation.\"",
+
+    "postinstall": "node initiator.mjs",
+
+    "playground": "concurrently \"npm run -w csser watch:scss\" \"vite --open playground.html\"",
+    "dev": "concurrently \"npm run -w csser watch:scss\" \"vite\"",
+
+    "build": "npm run -w csser build:scss && vite build --emptyOutDir",
+    "build-watch": "npm run -w csser build:scss && vite build --watch",
+
+    "visualize": "npx vite-bundle-visualizer",
+    "generate:sitemap": "node --experimental-strip-types --import=module ./src/services/sitemap/sitemap.ts ../../../dist/"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "",
+    "typescript": "",
+    "vite": "",
+    "vite-tsconfig-paths": "",
+    "vite-bundle-visualizer":""
+  }
+}
