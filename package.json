@@ -8,10 +8,7 @@
   ],
   "scripts": {
     "update-project": "git submodule update --recursive --remote",
-    "initiate": "git submodule update --init --recursive && npm install --recursive",
-    "git_init": "git init && git add -A && git commit -m \"Initiation.\"",
-
-    "postinstall": "node initiator.mjs",
+    "initiate": "git submodule update --init --recursive && npm install --recursive && git remote rm origin",
 
     "playground": "concurrently \"npm run -w csser watch:scss\" \"vite --open playground.html\"",
     "dev": "concurrently \"npm run -w csser watch:scss\" \"vite\"",
