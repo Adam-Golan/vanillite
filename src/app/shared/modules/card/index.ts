@@ -1,6 +1,6 @@
 import { Module, ModuleDecorator } from '@decorators';
 import { ICardConfig, ICardType, IAllCardKeys } from './lang';
-import { Avatar, Collapsible } from '@app/shared/components';
+import { Avatar, Collapsible } from '@shared/components';
 import { Form } from '../form';
 
 import './card.scss';

@@ -1,4 +1,4 @@
-import { Loader } from "@app/shared";
+import { Loader } from "@shared";
 import { Device } from "@services/device/device";
 import { Language } from "@services/language/language";
 import type { Page } from "@decorators";

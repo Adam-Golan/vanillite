@@ -1,7 +1,7 @@
 import './style/dist/style.css';
 // Playground
-import { Link } from "@app/shared";
-import { ILink } from '@app/shared/components/link/types';
+import { Link } from "@shared";
+import { ILink } from '@shared/components/link/types';
 
 const app = document.getElementById('app');
 const data: ILink = {

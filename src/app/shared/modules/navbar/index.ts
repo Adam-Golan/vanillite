@@ -1,9 +1,9 @@
 import { ModuleDecorator, Module } from "@decorators";
 import { State } from "@services";
 import { StateKeys } from "@constants/stateKeys.constant";
-import { Link } from "@app/shared";
-import { ILink } from "@app/shared/components/link/types";
-import { Extender } from "@app/shared";
+import { Link } from "@shared";
+import { ILink } from "@shared/components/link/types";
+import { Extender } from "@shared";
 import { ILinks, MenuItem } from "./types";
 
 import './navbar.scss';

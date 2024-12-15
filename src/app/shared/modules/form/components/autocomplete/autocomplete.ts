@@ -1,6 +1,6 @@
 import { ComponentDecorator } from "@decorators";
 import { FormKeyboardComponent } from "../base";
-import { FilterDropdown } from "@app/shared";
+import { FilterDropdown } from "@shared";
 import { IAutocompleteProps } from "../../interfaces";
 import { IOptionProps } from "../../interfaces/props/shared";
 

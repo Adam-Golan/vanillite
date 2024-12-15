@@ -1,4 +1,4 @@
-import { ILink } from '@app/shared/components/link-based/intefaces';
+import { ILink } from '@shared/components/link-based/intefaces';
 import { IHeaderText } from './components/header/lang';
 
 export interface IHeroText extends IHeaderText {

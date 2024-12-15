@@ -4,7 +4,7 @@ import { type Navigation, State } from "@services";
 import { StateKeys } from "@constants/stateKeys.constant";
 import { LayoutType } from "@decorators/types";
 import { BasePageText } from "@i18n/interfaces";
-import { IFooterConfig } from "@app/shared/modules/footer/types";
+import { IFooterConfig } from "@shared/modules/footer/types";
 
 /**
  * Enlists a custom element into the Custom Elements Registry as a page.
@@ -60,7 +60,7 @@ export abstract class Page<IText extends BasePageText = any> extends Basis<IText
     protected showPage(path = '/'): void {
         this.appState.publish(`${path}:${StateKeys.contentReady}`);
     }
-    
+
     /**
      * Updates the footer configuration and re-renders its components.
      * Merges the existing configuration with the new configuration,

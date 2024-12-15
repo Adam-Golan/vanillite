@@ -1,7 +1,7 @@
-import { IAboutTexts } from "@app/pages/about-us/types";
+import { IAboutTexts } from "@pages/about-us/types";
 import { ILink } from "../../components/link-based/intefaces";
-import { ICardConfig } from "@app/shared/modules/card/lang";
-import { IFormBtns, IFormMap } from "@app/shared/modules/form/interfaces";
+import { ICardConfig } from "@shared/modules/card/lang";
+import { IFormBtns, IFormMap } from "@shared/modules/form/interfaces";
 
 //  fb = Facebook
 //  tw = Twitter

@@ -1,6 +1,6 @@
 import { ComponentDecorator } from "@decorators";
 import { BaseDropdown } from "../base";
-import { IOptionProps } from "@app/shared/modules/form/interfaces/props/shared";
+import { IOptionProps } from "@shared/modules/form/interfaces/props/shared";
 
 @ComponentDecorator
 export class SelectDropdown extends BaseDropdown<IOptionProps> {

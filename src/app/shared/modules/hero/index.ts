@@ -2,7 +2,7 @@ import { Module, ModuleDecorator } from "@decorators";
 import { IHeroText } from "./lang";
 import { State } from "@services";
 import { StateKeys } from "@constants/stateKeys.constant";
-import { Link } from "@app/shared";
+import { Link } from "@shared";
 import { Header } from './components';
 
 import './hero.scss';

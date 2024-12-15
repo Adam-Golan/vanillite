@@ -1,4 +1,4 @@
-import { ICollapsible } from '@app/shared/components/collapsible/lang';
+import { ICollapsible } from '@shared/components/collapsible/lang';
 import { IFormMap, IFormBtns } from '../forms/interfaces';
 
 interface IBasicCard {

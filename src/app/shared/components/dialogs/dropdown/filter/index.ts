@@ -1,5 +1,5 @@
 import { ComponentDecorator } from "@decorators";
-import { IOptionProps } from "@app/shared/modules/form/interfaces/props/shared";
+import { IOptionProps } from "@shared/modules/form/interfaces/props/shared";
 import { SelectDropdown } from "../select";
 
 @ComponentDecorator
