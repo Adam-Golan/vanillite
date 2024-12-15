@@ -1,0 +1,77 @@
+badge-component.badge {
+  --pad-block: 5px;
+  --pad-inline: calc(var(--pad-block) * 2);
+  --color: var(--disabled-l-5);
+  --font-size: 0.7rem;
+  --pos: calc((var(--pad-block) * 2 + var(--font-size)) * -1);
+  padding: var(--pad-block) var(--pad-inline);
+  width: fit-content;
+  position: absolute;
+  border-radius: var(--pad-block);
+  background: var(--bg);
+  color: var(--color);
+  font-size: var(--font-size);
+  font-weight: bolder;
+  letter-spacing: calc(var(--pad-block) * 0.5);
+
+  &.top,
+  &.bottom {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  &.top {
+    top: var(--pos);
+    &-left {
+      top: calc(var(--pos) + var(--pad-block));
+      left: calc(var(--pos) - var(--pad-inline) + var(--pad-block));
+      rotate: -45deg;
+    }
+    &-right {
+      top: calc(var(--pos) + var(--pad-block));
+      right: calc(var(--pos) - var(--pad-inline) + var(--pad-block));
+      rotate: 45deg;
+    }
+  }
+  &.bottom {
+    bottom: var(--pos);
+    &-left {
+      bottom: calc(var(--pos) + var(--pad-block));
+      left: calc(var(--pos) - var(--pad-inline) + var(--pad-block));
+      rotate: 45deg;
+    }
+    &-right {
+      bottom: calc(var(--pos) + var(--pad-block));
+      right: calc(var(--pos) - var(--pad-inline) + var(--pad-block));
+      rotate: -45deg;
+    }
+  }
+  
+  &.left, &.right {
+    top: 50%;
+    transform: translateY(-50%) rotateZ(var(--deg));
+  }
+
+  &.left {
+    --deg: -90deg;
+    left: calc(var(--pos) - var(--pad-inline));
+  }
+  &.right {
+    --deg: 90deg;
+    right: calc(var(--pos) - var(--pad-inline));
+  }
+  
+
+  &.success {
+    --bg: var(--success-d-3);
+  }
+  &.info {
+    --bg: var(--info-d-5);
+  }
+  &.warn {
+    --bg: var(--warning-d-4);
+  }
+  &.danger {
+    --bg: var(--danger-d-3);
+  }
+}
