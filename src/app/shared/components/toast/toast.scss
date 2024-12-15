@@ -1,0 +1,49 @@
+toast-component.toast {
+  --color: var(--disabled-l-5);
+  --pad: 10px;
+  padding: var(--pad) calc(var(--pad) * 2);
+  width: fit-content;
+  display: block;
+  border-radius: 10px;
+  background: var(--bg);
+  filter: opacity(80%);
+  backdrop-filter: blur(2px);
+  transition: all 0.5s ease;
+  &.body {
+    position: fixed;
+    bottom: -30%;
+    left: 10px;
+    font-size: 1.2rem;
+    &.show {
+      bottom: 10px;
+    }
+  }
+  &.el {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    font-size: inherit;
+    &.show {
+      bottom: calc(100% + 10px);
+      opacity: 1;
+    }
+  }
+  &.success {
+    --bg: var(--success-d-1);
+  }
+  &.error {
+    --bg: var(--danger-d-1);
+  }
+  &.info {
+    --bg: var(--info-d-4);
+  }
+  &.warn {
+    --bg: var(--warning-d-3);
+  }
+  &.general {
+    --bg: var(--color);
+    color: black;
+  }
+}
