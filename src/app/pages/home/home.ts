@@ -1,14 +1,13 @@
 import { Page, PageDecorator } from "@decorators";
-import type { texts } from "@i18n/en/lang";
 import { Hero } from "@shared";
-
-import './home.scss';
 import { Counter } from "./components/counter";
 
+import './home.scss';
+
 @PageDecorator
-export class Home extends Page<typeof texts.home> {
+export class Home extends Page {
     protected init() {
-        this.append(new Hero(this.texts.HERO, this.appState), new Counter({}));
+        this.append(new Hero({header: 'wellcome to vanilla', subHeader: 'Not a framework, but a frame to work with.', img: '/hero.jpeg',}, this.appState), new Counter({}));
         super.init();
         this.showPage();
     }

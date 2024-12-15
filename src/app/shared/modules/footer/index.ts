@@ -2,7 +2,6 @@ import { ModuleDecorator, Module } from "@decorators";
 import type { State } from "@services";
 import { IFooterConfig } from "./types";
 import { Link } from "@shared/components";
-import { Form } from "@shared/modules";
 import { StateKeys } from "@constants/stateKeys.constant";
 
 import './footer.scss';
@@ -74,7 +73,7 @@ export class Footer extends Module<IFooterConfig> {
     private createContact(): void {
         const contact = this.createContainer('contact');
         const h4 = this.createSubHeader('get in touch');
-        contact.append(h4, new Form(this.config.contact!.map, this.config.contact!.btns));
+        contact.append(h4);
         this.append(contact);
     }
 

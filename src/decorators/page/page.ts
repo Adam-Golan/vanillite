@@ -14,7 +14,7 @@ export function PageDecorator(target: CustomElementConstructor) {
     Enlist('page', target);
 }
 
-export abstract class Page<IText = any> extends Basis<IText> {
+export abstract class Page extends Basis<null> {
     // Creating a page's state.
     state = new State();
     // Declaring layout type.
@@ -27,8 +27,8 @@ export abstract class Page<IText = any> extends Basis<IText> {
      * @param texts Page's texts.
      * @param appState Application's state.
      */
-    constructor(protected texts: IText, protected appState: State) {
-        super(texts);
+    constructor(protected _: null, protected appState: State) {
+        super(_);
         addMeta(this, 'page');
         // Setting data-layout.
         this.dataset.layout = this.layout;

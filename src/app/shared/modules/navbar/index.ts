@@ -3,7 +3,6 @@ import { State } from "@services";
 import { StateKeys } from "@constants/stateKeys.constant";
 import { Link } from "@shared";
 import { ILink } from "@shared/components/link/types";
-import { Extender } from "@shared";
 import { ILinks, MenuItem } from "./types";
 
 import './navbar.scss';
@@ -23,7 +22,6 @@ export class Navbar extends Module<IterableIterator<string>> {
         // this.createLogo();
         // this.createLogin();
         if (window.screen.width <= 480) this.createHamburger();
-        if (window.screen.width > 480 && this.type === 'top') this.createExtender();
         setTimeout(this.setActive.bind(this));
         window.addEventListener("popstate", this.setActive.bind(this));
         this.parentState.subscribe(StateKeys.navigate, this.setActive.bind(this));
@@ -67,19 +65,6 @@ export class Navbar extends Module<IterableIterator<string>> {
         for (const link of Array.from(this.clsElem('link')))
             link.addEventListener('click', () => hamburger.click());
         this.prepend(hamburger);
-    }
-
-    private createExtender() {
-        const links = this.clsElem('links')[0];
-        if (links.clientHeight > 50) {
-            const linksCollect = this.clsElem('link');
-            let linksWidth = 0;
-            for (const link of Array.from(linksCollect)) linksWidth += +link.getBoundingClientRect().width.toFixed(2);
-            const idx = Math.floor(window.screen.width / (linksWidth / linksCollect.length)) - 1;
-            const toRemove = Array.from(links.children).splice(idx) as Link[];
-            for (const link of toRemove) links.removeChild(link);
-            this.clsElem('links')[0].append(new Extender<Link>(toRemove, 'dots'));
-        }
     }
 
     private setActive(): void {

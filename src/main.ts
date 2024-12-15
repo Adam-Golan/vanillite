@@ -17,7 +17,8 @@ class Main {
   constructor() {
     setMetaTags(appConfig.meta);
     if (appConfig.OGCard) setOpenGraphTags(appConfig.OGCard);
-    this.navigation.importTexts().then(_ => this.init()); // Importing application's texts.
+    this.navigation.fisrtLoad();
+    this.init();
   }
 
   /**

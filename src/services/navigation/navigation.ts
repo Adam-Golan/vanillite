@@ -1,6 +1,5 @@
 import { Loader } from "@shared";
 import { Device } from "@services/device/device";
-import { Language } from "@services/language/language";
 import type { Page } from "@decorators";
 import type { State } from "@services/state/state";
 import { StateKeys } from "@constants/stateKeys.constant";
@@ -8,9 +7,8 @@ import { IPages, IPage } from "./types";
 
 export class Navigation {
     private loader = new Loader({});
-    private currentPage: Page<any>;
-    private cachedPages: Map<string, Page<any>> = new Map();
-    private i18n = new Language();
+    private currentPage: Page;
+    private cachedPages: Map<string, Page> = new Map();
     private history: string[] = [];
 
     get pages(): IterableIterator<string> {
@@ -38,19 +36,6 @@ export class Navigation {
     }
 
     // ------------------------------
-    // Texts handles.
-    // ------------------------------
-    public async importTexts(): Promise<void> {
-        await this.i18n.importTexts(Device.lang);
-        this.fisrtLoad();
-    }
-
-    public setTexts(texts: any): void {
-        this.i18n.texts = texts;
-        this.fisrtLoad();
-    }
-
-    // ------------------------------
     // Loading section.
     // ------------------------------
     public reload(): void {
@@ -58,7 +43,7 @@ export class Navigation {
         this.navigationLogic(location.pathname);
     }
 
-    private fisrtLoad(): void {
+    public fisrtLoad(): void {
         // this.history = [];
         if (location.pathname === this.basePath) this.pushState(this.homePage);
         Array.from(this.ref.children).forEach(child => !child.classList.contains('navbar') ? this.ref.removeChild(child) : null);
@@ -90,8 +75,7 @@ export class Navigation {
         } else {
             const Page = this.getPage(path);
             if (Page.name === this.currentPage?.constructor.name && !location.pathname.includes(path)) return;
-            const texts = this.i18n.getTexts(path.remove(/(\-|\/)/));
-            this.cachedPages.set(path, new Page(texts, this.state));
+            this.cachedPages.set(path, new Page(null, this.state));
             this.currentPage = this.cachedPages.get(path)!;
         }
     }
