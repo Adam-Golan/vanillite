@@ -1,6 +1,6 @@
 import { Home} from "@app/pages"
 import { IFooterConfig } from "@app/shared/modules/footer/types";
-// import type { IMetaTags, OGCard} from "@services"
+import type { IMetaTags, OGCard} from "@services"
 import type { IPage, IPages } from "@services/navigation/types";
 
 export const appConfig: AppConfig = {
@@ -8,17 +8,17 @@ export const appConfig: AppConfig = {
     routes: new Map<string, IPage>([
         ['/home', Home],
     ]),
-    // meta: {
-    //     description: "Welcome to Vanilla, a fast and reliable web development frame.",
-    //     keywords: "Vanilla, framework, fast development",
-    //     author: "Adam Golan"
-    // }
+    meta: {
+        description: "Welcome to Vanilla, a fast and reliable web development frame.",
+        keywords: "Vanilla, framework, fast development",
+        author: "Adam Golan"
+    }
 }
 
 interface AppConfig {
     siteURL: string;
     routes: IPages,
-    // meta: IMetaTags,
-    // OGCard?: OGCard,
+    meta: IMetaTags,
+    OGCard?: OGCard,
     footer?: IFooterConfig
 }
