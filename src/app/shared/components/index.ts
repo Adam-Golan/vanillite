@@ -1,6 +1,7 @@
 export * from './adder';
 export * from './avatar';
 export * from './badge';
+export * from './code';
 export * from './collapsible';
 export * from './dialogs';
 export * from './fluid';
