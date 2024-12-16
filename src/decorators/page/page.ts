@@ -3,7 +3,6 @@ import { Enlist, addMeta } from "@decorators/utils";
 import { type Navigation, State } from "@services";
 import { StateKeys } from "@constants/stateKeys.constant";
 import { LayoutType } from "@decorators/types";
-import { Footer } from "@shared";
 
 /**
  * Enlists a custom element into the Custom Elements Registry as a page.
@@ -21,8 +20,6 @@ export abstract class Page extends Basis<null> {
     layout: LayoutType = 'single_column';
     // Declaring optional navigation.
     private navigation?: Navigation;
-
-    private footer?: Footer;
 
     /**
      * Constructor for Page.
@@ -59,9 +56,5 @@ export abstract class Page extends Basis<null> {
      */
     protected showPage(path = '/'): void {
         this.appState.publish(`${path}:${StateKeys.contentReady}`);
-        if (this.texts.FOOTER) {
-           this.footer = new Footer(this.texts.FOOTER, this.appState);
-           this.append(this.footer);
-        }
     }
 }
