@@ -38,3 +38,24 @@ Use [playground](./src/playground.ts) if you want to experiment
 ```bash
   npm run playground
 ```
+
+## Vanillite
+**includes**
+- Decorators.
+- Core Services -> API, meta, Navigation, OG, state, sitemap.
+- Pages -> Home with a counter.
+- Modules -> Navbar, Footer, Hero.
+- Components -> Adder, Avatar, Fluid, Link, Loader, Modal, Tester, Seperator, Tooltip, Top.
+- Playground.
+## Vanilla
+**includes**
+- Decorators.
+- Core Services -> Vanillite + Device, Language, storage, timer.
+- Pages -> Vanillite + About us, Contact us.
+- Modules -> Vanillite + Card, Form, Table.
+- Components -> Vanillite + Badge, Code, Collapsible, Dialogs, Progress, Rating, Soon, Toast.
+- Playground.
+## Vanillarge
+**includes**
+- A complete mechanism dedicated for micro frontend.
+- Vanilla complete pack + Unit tests.
