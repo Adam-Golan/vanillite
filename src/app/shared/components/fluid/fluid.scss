@@ -1,5 +1,8 @@
-.fluid {
-  max-width: var(--fluidMaxHeight);
-  padding-inline: 15px;
+fluid-component.fluid {
+  padding: 4rem;
   margin-inline: auto;
+  max-width: var(--fluidMaxHeight);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px 20px;
 }
