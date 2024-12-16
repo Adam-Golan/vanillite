@@ -3,7 +3,6 @@ const StateKeys = {
     // // Navigation.
     navigate: 'navigate',
     contentReady: 'contentReady',
-    footerUpdate: 'footerUpdate',
     // // Dialogs.
     openModal: 'openModal',
     openDialog: 'openDialog',

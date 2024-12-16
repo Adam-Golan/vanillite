@@ -3,7 +3,7 @@ import { Enlist, addMeta } from "@decorators/utils";
 import { type Navigation, State } from "@services";
 import { StateKeys } from "@constants/stateKeys.constant";
 import { LayoutType } from "@decorators/types";
-import { IFooterConfig } from "@shared/modules/footer/types";
+import { Footer } from "@shared";
 
 /**
  * Enlists a custom element into the Custom Elements Registry as a page.
@@ -20,7 +20,9 @@ export abstract class Page extends Basis<null> {
     // Declaring layout type.
     layout: LayoutType = 'single_column';
     // Declaring optional navigation.
-    navigation?: Navigation;
+    private navigation?: Navigation;
+
+    private footer?: Footer;
 
     /**
      * Constructor for Page.
@@ -45,30 +47,21 @@ export abstract class Page extends Basis<null> {
         // Erase if upsetting.
         if (import.meta.env.DEV) {
             console.log('Don\'t forget to use showPage function, or you\'ll be stuck with the loader element.');
-            // if (this.navigation) console.log(`${this.constructor.name}: Don\'t forget to create a static method getPages(): IPages`);
+            if (this.navigation) console.log(`${this.constructor.name}: Don\'t forget to create a static method getPages(): IPages`);
         }
     }
 
     /**
-     * Shows the page after the page's content is loaded.
-     * @param path The path of the page to be shown, defaults to '/'.
-     * @remarks
-     * This method is not called automatically.
-     * You need to show the page manually, by calling this method.
+     * Shows the page after the content is ready.
+     * Publishes the `${path}:${StateKeys.contentReady}` state event.
+     * If the page has a footer, creates a new Footer instance and appends it to the page.
+     * @param path - The path of the page to show. Defaults to '/'.
      */
     protected showPage(path = '/'): void {
         this.appState.publish(`${path}:${StateKeys.contentReady}`);
-    }
-
-    /**
-     * Updates the footer configuration and re-renders its components.
-     * Merges the existing configuration with the new configuration,
-     * removes the existing DOM elements for updated sections,
-     * and recreates those elements if a corresponding creation method exists.
-     *
-     * @param newConfig - The new footer configuration to be merged with the existing one.
-     */
-    protected updateFooter(newConfig: IFooterConfig): void {
-        setTimeout(() => this.appState.publish(StateKeys.footerUpdate, newConfig));
+        if (this.texts.FOOTER) {
+           this.footer = new Footer(this.texts.FOOTER, this.appState);
+           this.append(this.footer);
+        }
     }
 }

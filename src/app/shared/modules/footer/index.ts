@@ -15,12 +15,9 @@ export class Footer extends Module<IFooterConfig> {
      *                 about each section to be rendered.
      * @param appState - The application state object, used to manage and respond
      *                   to state changes related to the footer.
-     * Subscribes to the footer update state key to trigger updates in the footer
-     * whenever changes occur.
      */
     constructor(protected config: IFooterConfig, protected appState: State) {
         super(config, appState);
-        this.appState.subscribe(StateKeys.footerUpdate, this.updateFooter.bind(this));
     }
     /**
      * Initializes the footer by creating its sections based on the configuration.
@@ -112,21 +109,5 @@ export class Footer extends Module<IFooterConfig> {
         const subHeader = this.cElem('h4');
         subHeader.innerText = text;
         return subHeader;
-    }
-
-    /**
-     * Updates the footer configuration and re-renders its components.
-     * Merges the existing configuration with the new configuration,
-     * removes the existing DOM elements for updated sections,
-     * and recreates those elements if a corresponding creation method exists.
-     *
-     * @param newConfig - The new footer configuration to be merged with the existing one.
-     */
-    private updateFooter(newConfig: IFooterConfig): void {
-        this.config = { ...this.config, ...newConfig };
-        for (const key of Object.keys(newConfig)) {
-            this.clsElem(key)[0].remove();
-            if (`create${key.capitalize()}` in this) (this as { [key: string]: any })[`create${key.capitalize()}`]();
-        }
     }
 }

@@ -2,7 +2,7 @@ import './style/dist/style.css';
 import './utils';
 
 import { Navigation, setMetaTags, State, setOpenGraphTags } from "@services";
-import { Modal, Navbar, Footer } from "@shared";
+import { Modal, Navbar } from "@shared";
 import { StateKeys } from '@constants/stateKeys.constant';
 import { appConfig } from 'app.config';
 
@@ -39,7 +39,6 @@ class Main {
    */
   private init(): void {
     document.body.append(new Navbar(this.navigation.pages, this.appState));
-    if (appConfig.footer) document.body.append(new Footer(appConfig.footer, this.appState));
     this.subscribes();
   }
 
