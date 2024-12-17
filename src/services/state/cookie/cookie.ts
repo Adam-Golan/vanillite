@@ -1,5 +1,3 @@
-import { CookieOptions } from "./types";
-
 export class Cookie {
     /**
      * Sets a cookie on the client-side.
@@ -9,9 +7,9 @@ export class Cookie {
      * @param options Options for setting the cookie. See the MDN documentation for more information:
      *     https://developer.mozilla.org/en-US/docs/Web/API/Document/cookie#Syntax
      */
-    public async set(name: string, value: any, options?: CookieOptions) {
-        const expiry = this._expiry(options);
-        document.cookie = `${name}=${value}; ${this._cookieString(expiry)}`;
+    public set(name: string, value: any, days = 7): void {
+        const expires = new Date(Date.now() + days * 864e5).toUTCString();
+        document.cookie = `${name}=${encodeURIComponent(value)}; expires=${expires}; path=/`;
     }
 
     /**
@@ -19,14 +17,8 @@ export class Cookie {
      *
      * @param name The name of the cookie to retrieve.
      */
-    public async get(name: string): Promise<string | null> {
-        const cookies = document.cookie.split('; ');
-        for (const cookie of cookies) {
-            if (cookie.startsWith(`${name}=`)) {
-                return cookie.split('=')[1];
-            }
-        }
-        return null;
+    public get(name: string): string | null {
+        return document.cookie.split('; ').find((row) => row.startsWith(`${name}=`))?.split('=')[1] || null;
     }
 
     /**
@@ -34,57 +26,33 @@ export class Cookie {
      *
      * @param name The name of the cookie to remove.
      */
-    public async remove(name: string) {
-        document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 GMT`;
+    public remove(name: string): void {
+        this.set(name, '', -1);
     }
 
     /**
-     * Calculates the expiry date for a cookie based on the provided options.
+     * Returns a Map of all cookies set on the document.
      *
-     * @param options Options for setting the cookie. See the MDN documentation for more information:
-     *     https://developer.mozilla.org/en-US/docs/Web/API/Document/cookie#Syntax
-     */
-    private _expiry(options?: CookieOptions): string {
-        if (!options || !options.expires) return '';
-        const expires = new Date(options.expires);
-        return `expires=${expires.toUTCString()}`;
-    }
-
-    /**
-     * Returns a string representing the cookie settings based on the provided options.
+     * This method iterates over each cookie string and extracts the key-value pairs,
+     * storing them in a new Map. The keys are the cookie names, and the values are the
+     * corresponding cookie values.
      *
-     * @param expiry The expiry date for the cookie.
+     * @returns {Map<string, string>} A Map of all cookies set on the document.
      */
-    private _cookieString(expiry: string): string {
-        return `${this._getDomain()}; ${expiry}; max-age=${this._maxAge()}; path=${this._getPath()}`;
-    }
-
-    /**
-     * Returns a string representing the domain for the cookie.
-     *
-     * @returns A string representing the domain for the cookie.
-     */
-    private _getDomain(): string {
-        return 'domain=example.com'; // Replace with your domain
-    }
-
-    /**
-     * Calculates the maximum age for a cookie based on the provided options.
-     *
-     * @param options Options for setting the cookie. See the MDN documentation for more information:
-     *     https://developer.mozilla.org/en-US/docs/Web/API/Document/cookie#Syntax
-     */
-    private _maxAge(options?: CookieOptions): number {
-        if (!options || !options.maxAge) return 0;
-        return options.maxAge;
-    }
-
-    /**
-     * Returns a string representing the path for the cookie.
-     *
-     * @returns A string representing the path for the cookie.
-     */
-    private _getPath(): string {
-        return '/'; // Replace with your path
+    public getAll(): Map<string, string> {
+        return document.cookie.split('; ').reduce((cookies, item) => {
+            /**
+             * Extracts a key-value pair from a single cookie string.
+             *
+             * This function splits the cookie string into two parts using the '=' character
+             * as the separator. The first part is the key (the cookie name), and the second
+             * part is the value (the cookie value).
+             *
+             * @param {string} item - A single cookie string.
+             * @returns {Map<string, string>} An array containing the key-value pair.
+             */
+            const [key, value] = item.split('=');
+            return cookies.set(key, decodeURIComponent(value));
+        }, new Map<string, string>());
     }
 }
