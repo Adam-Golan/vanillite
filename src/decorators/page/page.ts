@@ -19,7 +19,7 @@ export abstract class Page extends Basis<null> {
     // Declaring layout type.
     layout: LayoutType = 'single_column';
     // Declaring optional navigation.
-    private navigation?: Navigation;
+    navigation?: Navigation;
 
     /**
      * Constructor for Page.
