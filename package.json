@@ -17,7 +17,7 @@
     "build-watch": "npm run -w csser build:scss && vite build --watch",
 
     "visualize": "npx vite-bundle-visualizer",
-    "generate:sitemap": "node --experimental-strip-types --import=module ./src/services/sitemap/sitemap.ts ../../../dist/"
+    "generate:sitemap": "node --experimental-strip-types --import=module ./src/services/utils/sitemap/sitemap.ts ../../../dist/"
   },
   "author": "",
   "license": "ISC",
