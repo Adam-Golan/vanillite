@@ -12,7 +12,7 @@ Whether you’re starting small or scaling big, Vanilla is your trusted frame to
 
 **Vanilla, code once.**
 
-**packageincludes**
+**package includes**
 - Decorators.
 - Core Services -> API, meta, Navigation, OG, state, sitemap.
 - Pages -> Home with a counter.
