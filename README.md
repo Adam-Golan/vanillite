@@ -14,7 +14,7 @@ Whether you’re starting small or scaling big, Vanilla is your trusted frame to
 
 **package includes**
 - Decorators.
-- Core Services -> API, meta, Navigation, OG, state, sitemap.
+- Core Services -> API, meta, Navigation, OG, state, sitemap, Cookie, Query.
 - Pages -> Home with a counter.
 - Modules -> Navbar, Footer, Hero.
 - Components -> Adder, Avatar, Fluid, Link, Loader, Modal, Tester, Seperator, Tooltip, Top.
