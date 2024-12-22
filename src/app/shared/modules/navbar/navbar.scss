@@ -5,6 +5,7 @@ navbar-module.navbar {
   }
   &.side {
     height: 100%;
+    top: var(--pageBlockPad);
     box-shadow: none;
     overflow-y: auto;
     .links {
