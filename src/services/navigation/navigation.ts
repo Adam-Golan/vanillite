@@ -15,12 +15,6 @@ export class Navigation {
     }
 
     constructor(private state: State, private ref: HTMLElement, private _pages: IPages, private homePage = '/home', public basePath = '/') {
-        window.addEventListener('popstate', () => {
-            this.history[this.history.length - 2]
-                ? this.loadingProcess(this.history[this.history.length - 2])
-                : this.fisrtLoad();
-        });
-        window.addEventListener('hashchange', () => history.replaceState(null, '', window.location.pathname), { once: true });
         this.subscribes();
     }
 
@@ -32,6 +26,12 @@ export class Navigation {
         this.state.subscribe(StateKeys.navigate, (path) => this.loadingProcess(path));
         // Load Page.
         this.state.subscribe(`${this.basePath}:${StateKeys.contentReady}`, () => this.ref.replaceChild(this.currentPage, this.loader));
+        window.addEventListener('popstate', () => {
+            this.history[this.history.length - 2]
+                ? this.loadingProcess(this.history[this.history.length - 2])
+                : this.fisrtLoad();
+        });
+        window.addEventListener('hashchange', () => history.replaceState(null, '', window.location.pathname), { once: true });
     }
 
     // ------------------------------
