@@ -1,6 +1,7 @@
 fluid-component.fluid {
-  padding: 4rem var(--fluidBlockPad);
+  padding: 1rem;
   margin-inline: auto;
+  max-width: 800px;
   display: flex;
   flex-wrap: wrap;
   gap: 40px 20px;
