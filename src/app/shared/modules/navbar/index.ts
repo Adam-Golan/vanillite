@@ -17,8 +17,12 @@ export class Navbar extends Module<IterableIterator<string>> {
     }
 
     protected init() {
-        this.createLinks();
-        this.linkGenerator();
+        this.linksCreator();
+        if (!this.links.length) {
+            document.documentElement.style.setProperty('--pageBlockPad', '0');
+            this.remove();
+        };
+        this.linksRenderer();
         // this.createLogo();
         // this.createLogin();
         if (window.screen.width <= 480) this.createHamburger();
@@ -27,7 +31,8 @@ export class Navbar extends Module<IterableIterator<string>> {
         this.parentState.subscribe(StateKeys.navigate, this.setActive.bind(this));
     }
 
-    private createLinks(arrRef = this.links, pages = this.pages): void {
+    private linksCreator(arrRef = this.links, pages = this.pages): void {
+        if (Array.from(pages).length === 1) return;
         for (const page of pages) {
             const text = page.slice(1).addSpaces('uppercase').titleCase();
             // if (page.children.length) {
@@ -43,7 +48,7 @@ export class Navbar extends Module<IterableIterator<string>> {
         return typeof item === 'object' && 'text' in item && 'href' in item;
     }
 
-    private linkGenerator(): void {
+    private linksRenderer(): void {
         const container = this.cElem('div');
         container.className = 'links';
         container.append(...this.links);
