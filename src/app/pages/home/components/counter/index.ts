@@ -4,26 +4,23 @@ import './counter.scss';
 
 @ComponentDecorator
 export class Counter extends Component<{}> {
-    value: number = 0;
-    constructor(_: {}) {
-        super(_);
+    _value: number = 0;
+    field = this.cElem('span');
+
+    set value(newVal: number) {
+        this.uElem('field', this._value = newVal);
     }
-    
+
     protected init(): void {
         this.createHeader();
-        const container = this.createContainer('counter');
-        const value = this.cElem('span');
-        value.innerText = `${this.value}`;
-        value.className = 'value';
-        const add = this.cElem('span');
+        const [container, add, sub] = this.cAlot([{ tag: 'div', cls: 'container counter' }, { tag: 'span', cls: 'add' }, { tag: 'span', cls: 'sub' }]);
+        this.value = this._value;
+        this.field.className = 'value';
         add.innerHTML = '+';
-        add.className = 'add';
-        add.onclick = () => value.innerText = `${++this.value}`;
-        const sub = this.cElem('span');
+        add.onclick = () => this.value = ++this._value;
         sub.innerHTML = '-';
-        sub.className = 'sub';
-        sub.onclick = () => value.innerText = `${--this.value}`;
-        container.append(add, value, sub);
+        sub.onclick = () => this.value = --this._value;
+        container.append(add, this.field, sub);
         this.append(container);
         this.createSnippet();
     }
@@ -38,7 +35,7 @@ export class Counter extends Component<{}> {
         const header = this.cElem('h3');
         header.innerText = 'This is the snippet:';
         const samp = this.cElem('code');
-        samp.innerText = 'const value = this.cElem(\'span\');\nvalue.innerText = `${this.value}`;\nvalue.className = \'value\';\nconst add = this.cElem(\'span\');\nadd.innerHTML = \'+\';\nadd.className = \'add\';\nadd.onclick = () => value.innerText = `${++this.value}`;\nconst sub = this.cElem(\'span\');\nsub.innerHTML = \'-\';\nsub.className = \'sub\';\nsub.onclick = () => value.innerText = `${--this.value}`;';
+        samp.innerText = Counter.toString();
         this.append(header, samp);
     }
 }
