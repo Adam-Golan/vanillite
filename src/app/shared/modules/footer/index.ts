@@ -54,9 +54,8 @@ export class Footer extends Module<IFooterConfig> {
      * Finally it appends the 'links' container to the footer component.
      */
     private createLinks(): void {
-        const links = this.createContainer('links');
-        const h4 = this.createSubHeader('site links');
-        links.append(h4, ...this.config.links!.map(link => new Link(link, (path) => this.appState.publish(StateKeys.navigate, path))));
+        const [links] = this.cAlot([{ tag: 'div', cls: 'container links' }]);
+        links.append(this.createSubHeader('site links'), ...this.config.links!.map(link => new Link(link, (path) => this.appState.publish(StateKeys.navigate, path))));
         this.append(links);
     }
 
@@ -68,9 +67,8 @@ export class Footer extends Module<IFooterConfig> {
      * - Appends the contact section to the footer.
      */
     private createContact(): void {
-        const contact = this.createContainer('contact');
-        const h4 = this.createSubHeader('get in touch');
-        contact.append(h4);
+        const [contact] = this.cAlot([{ tag: 'div', cls: 'container contact' }]);
+        contact.append(this.createSubHeader('get in touch'), new Form(this.config.contact!.map, this.config.contact!.btns));
         this.append(contact);
     }
 
@@ -83,9 +81,8 @@ export class Footer extends Module<IFooterConfig> {
      * corresponding social media platform (e.g. 'fb', 'tw', 'ig', etc.).
      */
     private createSocials(): void {
-        const socials = this.createContainer('socials');
-        const h4 = this.createSubHeader('follow us');
-        socials.append(h4, ...Object.entries(this.config.socials!).map(([social, link]) => `<a href="${link}"><i class="${social}"></i></a>`));
+        const [socials] = this.cAlot([{ tag: 'div', cls: 'container socials' }]);
+        socials.append(this.createSubHeader('follow us'), ...Object.entries(this.config.socials!).map(([social, link]) => `<a href="${link}"><i class="${social}"></i></a>`));
         this.append(socials);
     }
 
@@ -95,7 +92,7 @@ export class Footer extends Module<IFooterConfig> {
      * to display the copyright text from the footer configuration.
      */
     private createCopyrights(): void {
-        const rights = this.createContainer('copyrights');
+        const [rights] = this.cAlot([{ tag: 'div', cls: 'container copyrights' }]);
         rights.innerHTML = `&copy; ${this.config.copyrights}`;
         this.append(rights);
     }
