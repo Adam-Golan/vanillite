@@ -52,17 +52,30 @@ export abstract class Basis<IConfig> extends HTMLElement {
 
 
     /**
-     * Create a container element with specified classes, tag, and attributes.
-     * 
-     * @param cls - A string or array of strings representing the class names to add to the element.
-     * @param tag - The tag name of the element to create (default is 'div').
-     * @param attrs - An object representing custom attributes to set on the element.
-     * @returns The created HTML element with the specified configuration.
+     * Updates an element property with a given value.
+     * If the 3rd parameter is provided, it sets an attribute on the element with the given name and value.
+     * If the 3rd parameter is not provided, it sets the innerHTML of the element to the given value.
+     * @param child The name of the element property to update.
+     * @param value The value to update the element property with.
+     * @param attr The name of the attribute to set on the element (optional).
      */
-    protected createContainer(cls: string | string[], tag: keyof HTMLElementTagNameMap = 'div', attrs: Record<string, string> = {}): HTMLElement {
-        const container = this.cElem(tag);
-        container.classList.add('container', ...Array.isArray(cls) ? cls : [cls]);
-        for (const [key, value] of Object.entries(attrs)) container.setAttribute(key, value);
-        return container;
+    protected uElem(child: keyof this, value: any, attr?: string): void {
+        if (this[child] instanceof HTMLElement) attr ? this[child].setAttribute(attr, value) : this[child].innerHTML = `${value}`;
+    }
+
+    /**
+     * Creates multiple HTML elements based on a given list of specifications.
+     * Each specification includes a tag name and an optional class name.
+     * @param list - An array of objects, each containing:
+     *   - `tag`: The tag name of the element to create (e.g., "div", "span").
+     *   - `cls` (optional): A class name to assign to the created element.
+     * @returns An array of created HTML elements.
+     */
+    protected cAlot(list: { tag: keyof HTMLElementTagNameMap, cls?: string }[]): HTMLElement[] {
+        return list.map(({ tag, cls }) => {
+            const el = this.cElem(tag);
+            if (cls) el.className = cls;
+            return el;
+        });
     }
 }
