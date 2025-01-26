@@ -2,7 +2,8 @@ import { defineConfig } from 'vite';
 import tsconfigPaths from 'vite-tsconfig-paths';
 
 export default defineConfig({
-  publicDir: 'src/images',
+  base: './',
+  publicDir: 'src/assets',
   server: {
     open: true,
     port: 3000,
