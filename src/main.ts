@@ -38,7 +38,7 @@ class Main {
    * @returns - Nothing.
    */
   private init(): void {
-    document.body.append(new Navbar(this.navigation.pages, this.appState));
+    document.body.append(new Navbar(this.navigation.tree, this.appState));
     this.subscribes();
   }
 

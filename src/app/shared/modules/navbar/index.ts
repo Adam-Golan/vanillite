@@ -4,14 +4,15 @@ import { StateKeys } from "@constants/stateKeys.constant";
 import { Link } from "@shared";
 import { ILink } from "@shared/components/link/types";
 import { ILinks, MenuItem } from "./types";
+import { IPagesTree } from "@services/navigation/types";
 
 import './navbar.scss';
 
 @ModuleDecorator
-export class Navbar extends Module<IterableIterator<string>> {
+export class Navbar extends Module<IPagesTree> {
     links: MenuItem[] = [];
 
-    constructor(protected pages: IterableIterator<string>, protected parentState: State, private type: 'top' | 'side' = 'top') {
+    constructor(protected pages: IPagesTree, protected parentState: State, type: 'top' | 'side' = 'top') {
         super(pages, parentState);
         this.classList.add(type);
     }
@@ -34,13 +35,16 @@ export class Navbar extends Module<IterableIterator<string>> {
     private linksCreator(arrRef = this.links, pages = this.pages): void {
         if (Array.from(pages).length === 1) return;
         for (const page of pages) {
-            const text = page.slice(1).addSpaces('uppercase').titleCase();
-            // if (page.children.length) {
-            //     const subLink: MenuItem[] = [];
-            //     this.createLinks(subLink, page.children);
-            //     arrRef.push(new Extender<MenuItem>(subLink, text));
-            // } else arrRef.push(new Link({ href: page.path, text }, () => this.parentState.publish(StateKeys.navigate, page)));
-            arrRef.push(new Link({ href: page, text }, () => this.parentState.publish(StateKeys.navigate, page)));
+            if (typeof page === 'string') {
+                const text = page.slice(1).addSpaces('uppercase').titleCase();
+                arrRef.push(new Link({ href: page, text }, () => this.parentState.publish(StateKeys.navigate, page)));
+            } else {
+                Object.keys(page).forEach(key => {
+                    const subLink: MenuItem[] = [];
+                    this.linksCreator(subLink, page[key]);
+                    // arrRef.push(new Extender<MenuItem>(subLink, key.slice(1)));
+                });
+            }
         }
     }
 
