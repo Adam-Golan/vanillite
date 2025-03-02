@@ -84,19 +84,13 @@ export class API {
         if (this.cache.has(cacheKey)) return Promise.resolve(this.cache.get(cacheKey));
         return fetch(`${this.service}/${action}`, init)
             .then(async res => {
-                if (res.ok) {
+                if (res.ok)
                     try {
                         return await res.json();
                     } catch (err) {
-                        throw new Error(`Failed to parse response: ${err}`);
+                        throw { message: `Failed to parse response: ${err}` };
                     }
-                } else {
-                    try {
-                        throw new Error((await res.json()).message);
-                    } catch (err) {
-                        throw new Error(`Failed to parse error response: ${err}`);
-                    }
-                }
+                else throw (await res.json());
             })
             .then(data => {
                 this.cache.set(cacheKey, data);
