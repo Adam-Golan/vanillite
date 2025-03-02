@@ -12,7 +12,7 @@ export class Link extends Component<ILink> {
         this.innerHTML = this.texts.text.replace(/\-/g, ' ');
         this.tabIndex = 0;
         this.dataset.href = this.texts.href;
-        this.onclick = () => { this.navigate(this.texts.href); }
+        this.onclick = () => { if (this.dataset.disabled !== 'true') this.navigate(this.texts.href); }
         if (this.texts.title) this.title = this.texts.title;
         if (this.texts.img?.length) {
             const img = this.cElem('img');
